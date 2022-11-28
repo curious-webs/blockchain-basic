@@ -4,14 +4,13 @@
 #
 
 version: '2'
-
+ 
 networks:
   test:
     name: fabric_test
 
-services:
-
-  ca_org1:
+services: 
+  ca-org1:
     image: hyperledger/fabric-ca:latest
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
@@ -22,14 +21,14 @@ services:
     ports:
       - "7054:7054"
       - "17054:17054"
-    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
-    volumes:
-      - ../organizations/fabric-ca/org1:/etc/hyperledger/fabric-ca-server
-    container_name: ca_org1
-    networks:
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d' 
+    volumes:  
+      - ../organizations/fabric-ca/tcs-ca:/etc/hyperledger/fabric-ca-server
+    container_name: ca-org1
+    networks: 
       - test
 
-  ca_org2:
+  ca-org2:
     image: hyperledger/fabric-ca:latest
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
@@ -42,12 +41,12 @@ services:
       - "18054:18054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ../organizations/fabric-ca/org2:/etc/hyperledger/fabric-ca-server
-    container_name: ca_org2
+      - ../organizations/fabric-ca/wipro-ca:/etc/hyperledger/fabric-ca-server
+    container_name: ca-org2
     networks:
       - test
 
-  ca_orderer:
+  ca-orderer:
     image: hyperledger/fabric-ca:latest
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
@@ -60,7 +59,7 @@ services:
       - "19054:19054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
     volumes:
-      - ../organizations/fabric-ca/ordererOrg:/etc/hyperledger/fabric-ca-server
-    container_name: ca_orderer
+      - ../organizations/fabric-ca/orderer-ca:/etc/hyperledger/fabric-ca-server
+    container_name: ca-orderer
     networks:
       - test

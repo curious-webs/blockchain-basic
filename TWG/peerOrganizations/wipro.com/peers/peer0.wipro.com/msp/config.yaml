@@ -1,14 +1,14 @@
 NodeOUs:
   Enable: true
   ClientOUIdentifier:
-    Certificate: cacerts/ca.wipro.com-cert.pem
+    Certificate: cacerts/localhost-8054-ca-org1.pem
     OrganizationalUnitIdentifier: client
   PeerOUIdentifier:
-    Certificate: cacerts/ca.wipro.com-cert.pem
+    Certificate: cacerts/localhost-8054-ca-org1.pem
     OrganizationalUnitIdentifier: peer
   AdminOUIdentifier:
-    Certificate: cacerts/ca.wipro.com-cert.pem
+    Certificate: cacerts/localhost-8054-ca-org1.pem
     OrganizationalUnitIdentifier: admin
   OrdererOUIdentifier:
-    Certificate: cacerts/ca.wipro.com-cert.pem
+    Certificate: cacerts/localhost-8054-ca-org1.pem
     OrganizationalUnitIdentifier: orderer

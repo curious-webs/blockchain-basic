@@ -1,0 +1,13 @@
+1. Deploy TLS CA
+2. Enroll Admin with TLS CA
+3. Register RCA ADMin with TLS CA
+4. Enroll RCA Admin with TLS CA
+5. Use signcerts and keystore of RCAADMIn to deploy Identity CA
+6. Deploy Identity CA
+7. Enroll Identity CA Admin
+
+
+Now we can register and Enroll identityes
+
+Registrer MSP identity with Identity CA
+Register TLS identity with TLS CA

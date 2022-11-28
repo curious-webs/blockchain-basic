@@ -1,0 +1,53 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+ 
+networks:
+  test:
+    name: fabric_test
+ 
+services: 
+  # tlsca-wipro:
+  #   image: hyperledger/fabric-ca:latest
+  #   environment:
+  #     - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+  #     - FABRIC_CA_SERVER_CA_NAME=tlsca-wipro
+  #     - FABRIC_CA_SERVER_TLS_ENABLED=true
+  #     - FABRIC_CA_SERVER_PORT=6054
+  #     - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:16054
+  #   ports:
+  #     - "6054:6054"
+  #     - "16054:16054"
+  #   command: sh -c 'fabric-ca-server start -b admin:adminpw -d' 
+  #   volumes:  
+  #     - ../organizations/fabric-ca/tlsca-wipro:/etc/hyperledger/fabric-ca-server
+  #   container_name: tlsca-wipro
+  #   networks: 
+  #     - test    
+
+  ca-wipro:
+    image: hyperledger/fabric-ca:latest
+    environment: 
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-wipro
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=6055
+      - FABRIC_CA_SERVER_TLS_CERTFILE=tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=tls/key.pem
+      - FABRIC_CA_SERVER_CSR_CN=ca-wipro
+      - FABRIC_CA_SERVER_CSR_HOSTS="*.wipro.com,ca.wipro.com"
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:16055
+    ports:
+      - "6055:6055"
+      - "16055:16055"  
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d' 
+    volumes:  
+      - ../organizations/fabric-ca/ca-wipro:/etc/hyperledger/fabric-ca-server
+      - ../organizations/tlsca-wipro/rcaadmin/msp/keystore/key.pem:/etc/hyperledger/fabric-ca-server/tls/key.pem
+      - ../organizations/tlsca-wipro/rcaadmin/msp/signcerts/cert.pem:/etc/hyperledger/fabric-ca-server/tls/cert.pem
+    container_name: ca-wipro 
+    networks:  
+      - test  

@@ -11,7 +11,7 @@ echo "Pruning Network"
 yes | docker network prune   
 
 echo "Deleting TWG Directory"
-rm -r TWG
+#  rm -r TWG
 echo "Deleting Block"
 rm genesis_block.block
   

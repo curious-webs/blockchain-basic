@@ -1,7 +1,7 @@
 ./dcln.sh
 echo "Generating Certificates"
-cryptogen generate --config=organizations/cryptogen/crypto-config-twg.yaml --output="TWG" 
-
+# cryptogen generate --config=organizations/cryptogen/crypto-config-twg.yaml --output="TWG" 
+  
 
 
 echo "Creating System Block - Only need to create for orderer"  
@@ -10,7 +10,7 @@ export FABRIC_CFG_PATH=${PWD}/configtx
 export ORDERER_CA=${PWD}/TWG/ordererOrganizations/orderer.com/orderers/orderer.orderer.com/msp/tlscacerts/tlsca.orderer.com-cert.pem 
 configtxgen -outputBlock genesis_block.block -profile TWGOrdererGenesis  -channelID system-channel
 
-
+  
 echo "Docker Up"
 docker compose -f docker/docker-compose-twg-net.yaml up -d
 
